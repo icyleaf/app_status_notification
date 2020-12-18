@@ -1,0 +1,69 @@
+AllCops:
+  TargetRubyVersion: 2.6
+  DisabledByDefault: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 60
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/ModuleLength:
+  Max: 150
+
+# Raise complexity metrics
+Metrics/AbcSize:
+  Max: 20
+
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# We do not need to support Ruby 1.9, so this is good to use.
+Style/SymbolArray:
+  Enabled: true
+
+Lint/EmptyWhen:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
+
+# Disable %w or %W instead for an array of words
+Style/WordArray:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: true
+
+Style/RescueStandardError:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: true
+
+Layout/HashAlignment:
+  Enabled: false

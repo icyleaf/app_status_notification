@@ -1,0 +1,44 @@
+zh:
+  messages:
+    app_version_created: '%{app} 创建了新版本: %{version}，当前状态 %{status}'
+    app_version_changed: '%{app} 提交版本号变更: **%{current_version}** => **%{new_version}**，当前状态 %{status}'
+    app_build_received: '%{app} %{version} 接收到新构建版本 **%{build}**，等待苹果预处理 ...'
+    app_build_processed: '%{app} %{version} 构建版本 **%{build}** 处理完毕，请手动登录网页上选中此构建版本'
+    app_build_selected: '%{app} %{version} 构建版本 **%{build}** 选中完毕，物料准备好就可以提交审核'
+    app_build_removed: '%{app} %{version} 构建版本 **%{build}** 已经被取消选中，请确认是否有新构建版本或重新登录网页上选中已上传构建版本'
+    app_build_changed: '%{app} %{version} 当前选中构建版本 **%{old_build}**，最新上传构建版本 %{new_build}，请确认选择正确的构建版本。'
+    app_build_failed: '%{app} %{version} 构建版本 **%{build}** 处理失败 %{status}，请手动登录网页上选中此构建版本'
+    app_was_on_sale: '%{app} v%{version} 版本已经发布到 App Store 撒花！！！'
+    app_store_status_changes: '%{app} v%{version} 状态变更为：**%{status}**'
+    app_store_status_changes_with_todo: '%{app} v%{version} 状态变更为：**%{status}**。确认事项：%{todo}'
+  app_store_status:
+    ready_for_sale: '发布至应用商店'
+    processing_for_app_store: '上架应用商店预处理中'
+    pending_developer_release: '等待手动发布新版本'
+    in_review: '审核中'
+    waiting_for_review: '等待审核'
+    developer_rejected: '用户撤回'
+    rejected: '审核驳回，请去网页或 Connect App 查看被拒原因'
+    prepare_for_submission: '等待提交审核'
+    metadata_rejected: '元数据驳回，请去网页或 Connect App 查看被拒原因'
+    invalid_binary: '无效的二进制包'
+  todo:
+    ready_for_sale:
+    processing_for_app_store:
+    pending_developer_release:
+    in_review:
+    waiting_for_review:
+    developer_rejected:
+    rejected:
+    prepare_for_submission:
+    metadata_rejected:
+    invalid_binary:
+
+  logger:
+    current_env: '当前运行环境: %{name}'
+    setup_accounts: '开始初始化 %{numbers} 个账户'
+    setup_apps: '配置账户 %{issuer_id} 下的 %{apps} 个应用'
+
+    not_found_edit_version: '没有找到编辑版本，当前现在版本是 %{version}'
+    wait_next_loop: '等待下次查询，刷新时长 %{interval}'
+    interrupt: 人为退出程序

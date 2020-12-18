@@ -1,0 +1,10 @@
+---
+en:
+  messages:
+    app_version_created: '【%{app}】Create a new version: %{version}, current status: %{status}'
+    app_version_changed: ''
+    app_was_on_sale: '%{app} v%{version} 版本已经发布到 App Store 撒花！！！'
+    app_store_status_changes: '%{app} v%{version} 状态变更为：**%{status}**'
+    app_store_status_changes_with_todo: '%{app} v%{version} 状态变更为：**%{status}**。确认事项：%{todo}'
+  app_status:
+    READY_FOR_SALE: 'Ready For Sale'

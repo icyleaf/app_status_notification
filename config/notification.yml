@@ -1,0 +1,30 @@
+refresh_interval: 60
+locale: zh
+
+accounts:
+  - issuer_id:
+    key_id:
+    key_path:
+    apps:
+      # Enable all notifications
+      - 123456789
+
+  - issuer_id:
+    key_id:
+    key_path:
+    apps:
+      - id:
+        # Enable wecom only
+        notifications:
+          - wecom
+
+notifications:
+  wecom:
+    type: wecom
+    webhook_url:
+  dingding:
+    type: dingding
+    webhook_url:
+  slack:
+    type: slack
+    webhook_url:

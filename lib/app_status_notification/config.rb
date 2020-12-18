@@ -1,0 +1,168 @@
+# frozen_string_literal: true
+
+require 'anyway_config'
+require 'raven/base'
+require 'logger'
+require 'i18n'
+
+module AppStatusNotification
+  class Config < Anyway::Config
+    config_name :notification
+
+    attr_config accounts: [],
+                notifications: {},
+                refresh_interval: 60,
+                locale: 'zh',
+                dry: false,
+                enable_crash_report: true,
+                crash_report: 'https://aa7c78acbb324fcf93169fce2b7e5758@o333914.ingest.sentry.io/5575774'
+
+    def debug?
+      (ENV['ASN_ENV'] || ENV['RACK_ENV'] || ENV['RAILS_ENV']) != 'production'
+    end
+
+    def dry?
+      !!dry
+    end
+
+    def env
+      debug? ? 'development' : 'production'
+    end
+
+    def logger
+      return @logger if @logger
+
+      @logger = Logger.new(STDOUT)
+      @logger.level = debug? ? Logger::DEBUG : Logger::INFO
+      @logger
+    end
+
+    def accounts
+      @account ||= Account.parse(super)
+    end
+
+    def store_path
+      File.join(File.expand_path('../../', __dir__), 'stores')
+    end
+
+    def config_path
+      File.join(File.expand_path('../../', __dir__), 'config')
+    end
+
+    on_load :configure_crash_report
+    on_load :configure_locale
+    on_load :ensure_accounts
+    on_load :ensure_notifications
+
+    def configure_locale
+      I18n.load_path << Dir[File.join(config_path, 'locales', '*.yml')]
+      I18n.locale = locale.to_sym
+    end
+
+    def configure_crash_report
+      return unless enable_crash_report
+
+      Raven.configure do |raven|
+        raven.dsn = crash_report
+        raven.current_environment = env
+        raven.logger = logger
+        raven.release = AppStatusNotification::VERSION
+        raven.excluded_exceptions += [
+          'Faraday::SSLError',
+          'Spaceship::UnauthorizedAccessError',
+          'Interrupt',
+          'SystemExit',
+          'SignalException'
+        ]
+
+        raven.before_send = lambda { |event, hint|
+          event.extra = {
+            config: self.to_h
+          }
+
+          event
+        }
+      end
+    end
+
+    def ensure_accounts
+      %w[key_id issuer_id apps].each do |key|
+        accounts.each do |account|
+          unless account.send(key.to_sym)
+            raise ConfigError, "Missing account properties: #{key}"
+          end
+
+          unless account.key_path && account.key_exists?
+            raise ConfigError, "Can not find key file, place one into config directory, Eg: config/AuthKey_xxx.p8"
+          end
+        end
+      end
+    end
+
+    def ensure_notifications
+      if notifications.nil? || notifications.empty?
+        raise ConfigError, "Missing notifications"
+      elsif notifications.is_a?(Hash)
+        notifications.each do |key, url|
+          raise ConfigError, "Missing url properties: #{key}" unless url
+        end
+      end
+    end
+
+    class Account
+      def self.parse(accounts)
+        [].tap do |obj|
+          accounts.each do |account|
+            obj << Account.new(account)
+          end
+        end
+      end
+
+      attr_reader :issuer_id, :key_id, :key_path
+      attr_reader :apps
+
+      def initialize(raw)
+        @issuer_id = raw['issuer_id']
+        @key_id = raw['key_id']
+        @key_path = raw['key_path']
+        @apps = App.parse(raw['apps'])
+      end
+
+      def key_exists?
+        File.file?(key_path) || File.readable?(key_path)
+      end
+
+      def private_key
+        File.read(key_path)
+      end
+
+      class App
+        def self.parse(apps)
+          raise MissingAppsConfigError, 'Unable handle all apps of account, add app id(s) under accounts with name `apps`.' unless apps
+
+          [].tap do |obj|
+            apps.each do |app|
+              obj << App.new(app)
+            end
+          end
+        end
+
+        attr_reader :id
+
+        def initialize(raw)
+          case raw
+          when String, Integer
+            @id = raw.to_s
+          when Hash
+            @id = raw['id'].to_s
+            @notifications = raw['notifications']
+          end
+        end
+
+        def notifications
+          @notifications ||= []
+        end
+      end
+    end
+  end
+end

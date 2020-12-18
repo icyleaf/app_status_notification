@@ -1,0 +1,9 @@
+.vscode/
+bin/
+stores/
+.bundle/
+*.log
+status.json
+config/*.local.yml
+config/*.p8
+main.rb
