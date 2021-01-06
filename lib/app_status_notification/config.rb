@@ -54,6 +54,8 @@ module AppStatusNotification
     on_load :ensure_accounts
     on_load :ensure_notifications
 
+    private
+
     def configure_locale
       I18n.load_path << Dir[File.join(config_path, 'locales', '*.yml')]
       I18n.locale = locale.to_sym
@@ -77,7 +79,7 @@ module AppStatusNotification
 
         raven.before_send = lambda { |event, hint|
           event.extra = {
-            config: self.to_h
+            config: self.to_filtered_h
           }
 
           event
@@ -107,6 +109,60 @@ module AppStatusNotification
           raise ConfigError, "Missing url properties: #{key}" unless url
         end
       end
+    end
+
+    def to_filtered_h
+      @to_filtered_h ||= to_h.each_with_object({}) do |(k, v), obj|
+        case k
+        when :accounts
+          obj[k] = filter_accounts
+        when :notifications
+          obj[k] = filter_notifications(v)
+        when :crash_report
+          obj[k] = filtered_token(v)
+        else
+          obj[k] = v
+        end
+      end
+    end
+
+    def filter_accounts
+      accounts.each_with_object([]) do |account,  obj|
+        item = {
+          issuer_id: filtered_token(account.issuer_id),
+          key_id: filtered_token(account.key_id),
+          key_path: filtered_token(account.key_path),
+          apps: []
+        }
+
+        account.apps.each do |app|
+          item[:apps] << {
+            id: filtered_token(app.id),
+            notifications: app.notifications
+          }
+        end
+
+        obj << item
+      end
+    end
+
+    def filter_notifications(notifications)
+      notifications.each_with_object({}) do |(k, v), obj|
+        new_v = v.dup
+        new_v['webhook_url'] = filtered_token(new_v['webhook_url'])
+        obj[k] = new_v
+      end
+    end
+
+    def filtered_token(chars)
+      chars = chars.to_s
+      return '*' * chars.size if chars.size < 4
+
+      average = chars.size / 4
+      prefix = chars[0..average - 1]
+      hidden = '*' * (average * 2)
+      suffix = chars[(prefix.size + average * 2)..-1]
+      "#{prefix}#{hidden}#{suffix}"
     end
 
     class Account
