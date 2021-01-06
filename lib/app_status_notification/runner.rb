@@ -12,6 +12,7 @@ module AppStatusNotification
 
     def initialize(context)
       @context = context
+      determine_notification!
     end
 
     def_delegators :@context, :config, :client
@@ -44,7 +45,7 @@ module AppStatusNotification
         check_app_store_version_changes(review_version, review_status)
         app_store_status_changes_notification(edit_version)
 
-        return unless edit_version.editable?
+        next unless edit_version.editable?
 
         check_selected_build_changes(edit_version)
         build_processing_changes_notification(edit_version)
@@ -317,7 +318,7 @@ module AppStatusNotification
         next unless allowed_notifications.size == 0 ||
                     allowed_notifications.include?(nname)
 
-        logger.debug t('logger.send_notification', name: nname, message: t(message))
+        logger.debug t('logger.send_notification', name: nname, message: t(**message))
         Notification.send(message, nargs) unless config.dry?
       end
     end
@@ -356,6 +357,13 @@ module AppStatusNotification
     #####################
     # Internal
     #####################
+
+    def determine_notification!
+      global_notifications = config.notifications
+      app_notifications = context.app.notifications
+      enabled_notifications = app_notifications.empty? ? global_notifications.keys : app_notifications
+      logger.info "Enabled notifications (#{enabled_notifications.size}): #{enabled_notifications.join(', ')}"
+    end
 
     def find_app
       logger.info t('logger.found_app', name: app.name, id: app.id, bundle_id: app.bundle_id)
