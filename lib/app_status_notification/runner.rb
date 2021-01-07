@@ -338,7 +338,7 @@ module AppStatusNotification
 
     def get_edit_version
       version = client.app_edit_version(app.id)
-      logger.debug "API Rate: #{version.rate}"
+      logger.debug "API Rate: #{version.rate}" if version
       version
     end
 
