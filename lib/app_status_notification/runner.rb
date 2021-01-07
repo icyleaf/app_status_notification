@@ -197,9 +197,8 @@ module AppStatusNotification
       logger.debug t('logger.not_found_edit_version', version: live_version.version_string)
 
       app_on_sale_with_uncatch_process_notification(live_version)
-
       store.clear
-      logger.debug t('logger.wait_next_loop', interval: config.refresh_interval)
+
       true
     end
 
