@@ -74,7 +74,8 @@ module AppStatusNotification
           'Spaceship::UnauthorizedAccessError',
           'Interrupt',
           'SystemExit',
-          'SignalException'
+          'SignalException',
+          'Faraday::ConnectionFailed'
         ]
 
         raven.before_send = lambda { |event, hint|
