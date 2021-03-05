@@ -1,6 +1,7 @@
 .vscode/
 bin/
 stores/
+pkg/
 .bundle/
 *.log
 status.json

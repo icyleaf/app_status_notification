@@ -6,13 +6,11 @@ module AppStatusNotification
   class Watchman
     include AppStatusNotification::I18nHelper
 
-    def self.run(config_file)
-      if config_file.nil? && block_given?
-        config = Config.new
-        yield config
-      else
-        config = Config.new(config_file)
-      end
+    def self.run(config_file = nil)
+      Anyway::Settings.default_config_path = config_file if File.exist?(config_file)
+
+      config = Config.new
+      yield config if block_given?
 
       Watchman.new(config).run
     end

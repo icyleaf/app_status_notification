@@ -25,7 +25,7 @@ module AppStatusNotification
       logger.info t('logger.interrupt')
       exit
     rescue => e
-      Raven.capture_exception(e)
+      Raven.capture_exception(e) unless config.dry?
 
       logger.error t('logger.raise_error', message: e.full_message)
       wait_next_loop

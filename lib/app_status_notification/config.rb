@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'app_status_notification/version'
 require 'anyway_config'
 require 'raven/base'
 require 'logger'

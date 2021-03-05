@@ -7,9 +7,18 @@ require 'app_status_notification/store'
 require 'app_status_notification/connect_api'
 require 'app_status_notification/notification'
 require 'app_status_notification/watchman'
+require 'app_status_notification/command'
 
 module AppStatusNotification
-  def self.run(config_file = nil)
+  def self.run(params = ARGV)
+    AppStatusNotification::Command.run(params)
+  end
+
+  def self.watch(config_file = nil)
     AppStatusNotification::Watchman.run(config_file)
+  end
+
+  def self.development(enabled = false)
+    Anyway::Settings.use_local_files = !!enabled
   end
 end

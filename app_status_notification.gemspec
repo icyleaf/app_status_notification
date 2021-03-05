@@ -19,12 +19,15 @@ Gem::Specification.new do |spec|
   end
 
   spec.require_paths = ['lib']
+  spec.bindir = 'exe'
+  spec.executables << 'app_status_notification'
 
   spec.add_dependency 'faraday', '>= 1.0.1'
   spec.add_dependency 'faraday_middleware', '>= 1.0.0'
   spec.add_dependency 'jwt', '>= 1.4', '<= 2.2.1'
   spec.add_dependency 'anyway_config', '>= 2.0.0'
   spec.add_dependency 'activesupport', '>= 6.0.3.1'
+  spec.add_dependency 'gli', '~> 2.20.0'
   spec.add_dependency 'i18n', '~> 1.8.5'
   spec.add_dependency 'sentry-raven'
 
