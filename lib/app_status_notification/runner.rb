@@ -77,6 +77,9 @@ module AppStatusNotification
       latest_build = get_app_latest_build
       return if latest_build.nil?
 
+      # 检查 build 的 app 版本是否和当前审核版本一致
+      return if latest_build.pre_release_version.version != edit_version.version_string
+
       # 检查选中版本是否是最新版本
       return if same_selected_build?(edit_version.build, latest_build)
 
