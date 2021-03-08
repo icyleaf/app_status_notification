@@ -21,9 +21,13 @@ class AppStatusNotification::Command
   arg_name 'value'
   flag [:'log-level']
 
-  desc 'Set config file'
-  arg_name 'config/notification.yml'
+  desc 'Set config path'
+  arg_name 'config'
   flag [:c, :config]
+
+  desc 'Set locale path'
+  arg_name 'locale'
+  flag [:locale]
 
   desc 'Start watch service'
   arg_name 'Describe arguments to ddd here'
@@ -50,7 +54,7 @@ class AppStatusNotification::Command
   end
 
   on_error do |exception|
-    puts exception.backtrace
+    puts exception.backtrace unless exception.is_a?(Interrupt)
     # Error logic here
     # return false to skip default error handling
     true

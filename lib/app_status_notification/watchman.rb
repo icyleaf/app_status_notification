@@ -6,8 +6,8 @@ module AppStatusNotification
   class Watchman
     include AppStatusNotification::I18nHelper
 
-    def self.run(config_file = nil)
-      Anyway::Settings.default_config_path = config_file if File.exist?(config_file)
+    def self.run(config_path = nil)
+      Anyway::Settings.default_config_path = config_path if Dir.exist?(config_file)
 
       config = Config.new
       yield config if block_given?
@@ -35,7 +35,7 @@ module AppStatusNotification
 
     def configure_logger
       @logger ||= config.logger
-      @logger.info t('logger.current_env', name: config.env)
+      @logger.info t('logger.current_env', name: config.env, version: AppStatusNotification::VERSION)
       @logger.debug config
     end
   end

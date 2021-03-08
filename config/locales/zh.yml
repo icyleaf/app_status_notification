@@ -41,7 +41,7 @@ zh:
     invalid_binary:
 
   logger:
-    current_env: '当前运行环境: %{name}'
+    current_env: '当前运行环境: %{name}, 版本: %{version}'
     setup_accounts: '开始初始化 %{numbers} 个账户'
     setup_apps: '配置账户 %{issuer_id} 下的 %{apps} 个应用'
     found_app: '找到匹配应用 %{id} - %{name} (%{bundle_id})'

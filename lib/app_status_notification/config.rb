@@ -18,6 +18,11 @@ module AppStatusNotification
                 enable_crash_report: true,
                 crash_report: 'https://aa7c78acbb324fcf93169fce2b7e5758@o333914.ingest.sentry.io/5575774'
 
+    def load_locale(path, file = '*.yml')
+      path = File.join(path) unless path.ends_with?(file)
+      I18n.load_path << Dir[path]
+    end
+
     def debug?
       (ENV['ASN_ENV'] || ENV['RACK_ENV'] || ENV['RAILS_ENV']) != 'production'
     end
@@ -50,15 +55,18 @@ module AppStatusNotification
       File.join(File.expand_path('../../', __dir__), 'config')
     end
 
-    on_load :configure_crash_report
     on_load :configure_locale
     on_load :ensure_accounts
     on_load :ensure_notifications
+    on_load :configure_crash_report
 
     private
 
     def configure_locale
+      # built-in
       I18n.load_path << Dir[File.join(config_path, 'locales', '*.yml')]
+
+      # default locale
       I18n.locale = locale.to_sym
     end
 
