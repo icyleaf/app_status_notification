@@ -54,10 +54,10 @@ class AppStatusNotification::Command
   end
 
   on_error do |exception|
-    puts exception.backtrace unless exception.is_a?(Interrupt)
+    # puts exception.backtrace unless exception.is_a?(Interrupt)
     # Error logic here
     # return false to skip default error handling
-    true
+    false
   end
 
   default_command :watch

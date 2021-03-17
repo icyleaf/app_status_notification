@@ -59,9 +59,13 @@ module AppStatusNotification
 
     private
 
+    def builtin_config_path
+      @builtin_config_path ||= File.join(File.expand_path('../../', __dir__), 'config')
+    end
+
     def configure_locale
       # built-in
-      I18n.load_path << Dir[File.join(File.expand_path('../../', __dir__), 'config', 'locales', '*.yml')]
+      I18n.load_path << Dir[File.join(builtin_config_path, 'locales', '*.yml')]
 
       # default locale
       I18n.locale = locale.to_sym
