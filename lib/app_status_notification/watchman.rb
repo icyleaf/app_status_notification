@@ -7,7 +7,7 @@ module AppStatusNotification
     include AppStatusNotification::I18nHelper
 
     def self.run(config_path = nil)
-      Anyway::Settings.default_config_path = config_path if Dir.exist?(config_file)
+      Anyway::Settings.default_config_path = config_path if Dir.exist?(config_path)
 
       config = Config.new
       yield config if block_given?

@@ -32,12 +32,12 @@ class AppStatusNotification::Command
   desc 'Start watch service'
   arg_name 'Describe arguments to ddd here'
   command :watch do |c|
-    c.action do |global_options, options, args|
-      AppStatusNotification.watch(global_options[:config])
+    c.action do |global, options, args|
+      AppStatusNotification.watch(global[:config])
     end
   end
 
-  pre do |global,command,options,args|
+  pre do |global, command, options, args|
     AppStatusNotification.development(global[:development])
     # Pre logic here
     # Return true to proceed; false to abort and not call the
