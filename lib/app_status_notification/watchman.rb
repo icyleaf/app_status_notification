@@ -1,15 +1,22 @@
 # frozen_string_literal: true
 
 require 'app_status_notification/runner'
+require 'fileutils'
 
 module AppStatusNotification
   class Watchman
     include AppStatusNotification::I18nHelper
 
-    def self.run(config_path = nil)
-      Anyway::Settings.default_config_path = config_path if Dir.exist?(config_path)
+    def self.run(config_path = nil, store_path = '.')
+      Anyway::Settings.default_config_path = config_path if config_path && Dir.exist?(config_path)
 
       config = Config.new
+
+      if store_path
+        FileUtils.mkdir_p(store_path)
+        config.store_path = store_path
+      end
+
       yield config if block_given?
 
       Watchman.new(config).run

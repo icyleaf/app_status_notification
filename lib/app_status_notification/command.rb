@@ -25,15 +25,15 @@ class AppStatusNotification::Command
   arg_name 'config'
   flag [:c, :config]
 
-  desc 'Set locale path'
-  arg_name 'locale'
-  flag [:locale]
+  desc 'Set store path'
+  arg_name 'store'
+  flag [:s, :store]
 
   desc 'Start watch service'
   arg_name 'Describe arguments to ddd here'
   command :watch do |c|
     c.action do |global, options, args|
-      AppStatusNotification.watch(global[:config])
+      AppStatusNotification.watch(global[:config], global[:store])
     end
   end
 

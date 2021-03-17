@@ -14,6 +14,7 @@ module AppStatusNotification
                 notifications: {},
                 refresh_interval: 60,
                 locale: 'zh',
+                store_path: 'stores',
                 dry: false,
                 enable_crash_report: true,
                 crash_report: 'https://aa7c78acbb324fcf93169fce2b7e5758@o333914.ingest.sentry.io/5575774'
@@ -47,12 +48,8 @@ module AppStatusNotification
       @account ||= Account.parse(super)
     end
 
-    def store_path
-      File.join(File.expand_path('../../', __dir__), 'stores')
-    end
-
     def config_path
-      File.join(File.expand_path('../../', __dir__), 'config')
+      Anyway::Settings.default_config_path
     end
 
     on_load :configure_locale
@@ -64,7 +61,7 @@ module AppStatusNotification
 
     def configure_locale
       # built-in
-      I18n.load_path << Dir[File.join(config_path, 'locales', '*.yml')]
+      I18n.load_path << Dir[File.join(File.expand_path('../../', __dir__), 'config', 'locales', '*.yml')]
 
       # default locale
       I18n.locale = locale.to_sym
