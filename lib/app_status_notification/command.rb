@@ -57,7 +57,7 @@ class AppStatusNotification::Command
     # puts exception.backtrace unless exception.is_a?(Interrupt)
     # Error logic here
     # return false to skip default error handling
-    false
+    exception.is_a?(SystemExit) ? false : true
   end
 
   default_command :watch
