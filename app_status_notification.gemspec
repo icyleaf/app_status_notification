@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['icyleaf']
   spec.email         = ['icyleaf.cn@gmail.com']
 
-  spec.summary       = 'Get those App Store Connect notifications delivered directly to Slack.'
+  spec.summary       = 'Get those App Store Connect notifications delivered directly to WeChat/Slack/Dingding etc.'
   spec.homepage      = 'https://github.com/icyleaf/app_status_notification'
   spec.license       = 'MIT'
 

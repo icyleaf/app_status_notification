@@ -321,6 +321,7 @@ module AppStatusNotification
                     allowed_notifications.include?(nname)
 
         logger.debug t('logger.send_notification', name: nname, message: t(**message))
+        nargs[:logger] = logger
         Notification.send(message, nargs) unless config.dry?
       end
     end

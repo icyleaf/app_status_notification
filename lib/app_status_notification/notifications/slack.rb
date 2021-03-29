@@ -48,12 +48,10 @@ module AppStatusNotification
                 end
 
         response = Net::HTTP.post(@webhook_url,  data.to_json, 'Content-Type' => 'application/json')
-
-        ap response.code
-        ap response.body
-      # rescue => e
-      #   @exception = e
-      #   nil
+        logger.debug "#{self.class} response [#{response.code}] #{response.body}"
+      rescue => e
+        @exception = e
+        nil
       end
 
       Notification.register self, :slack

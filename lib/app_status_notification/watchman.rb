@@ -7,11 +7,10 @@ module AppStatusNotification
   class Watchman
     include AppStatusNotification::I18nHelper
 
-    def self.run(config_path = nil, store_path = '.')
+    def self.run(config_path = nil, store_path = nil)
       Anyway::Settings.default_config_path = config_path if config_path && Dir.exist?(config_path)
 
       config = Config.new
-
       if store_path
         FileUtils.mkdir_p(store_path)
         config.store_path = store_path

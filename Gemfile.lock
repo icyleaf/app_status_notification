@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    app_status_notification (0.9.0.beta5)
+    app_status_notification (0.9.0.beta6)
       activesupport (>= 6.0.3.1)
       anyway_config (>= 2.0.0)
       faraday (>= 1.0.1)
@@ -14,7 +14,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.3)
+    activesupport (6.1.3.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)

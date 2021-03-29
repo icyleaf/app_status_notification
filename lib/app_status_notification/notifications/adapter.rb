@@ -11,6 +11,7 @@ module AppStatusNotification
 
       def initialize(options = {}) # rubocop:disable Style/OptionHash
         @options = options
+        @logger = @options[:logger]
       end
 
       # def send(message)
@@ -20,6 +21,12 @@ module AppStatusNotification
       # def on_error(exception)
       #   fail Error, "Adapter does not supports #send"
       # end
+
+      private
+
+      def logger
+        @logger
+      end
     end
   end
 end

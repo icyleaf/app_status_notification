@@ -24,11 +24,10 @@ module AppStatusNotification
         }
 
         response = Net::HTTP.post(build_url, data.to_json, 'Content-Type' => 'application/json')
-        ap response.code
-        ap response.body
-      # rescue => e
-      #   @exception = e
-      #   nil
+        logger.debug "#{self.class} response [#{response.code}] #{response.body}"
+      rescue => e
+        @exception = e
+        nil
       end
 
       def build_url
