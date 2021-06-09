@@ -13,3 +13,7 @@ require 'rubocop/rake_task'
 RuboCop::RakeTask.new(:rubocop)
 
 task(default: %i[spec rubocop])
+
+task :gem_version do
+  puts "#{AppStatusNotification::NAME}-#{AppStatusNotification::VERSION}"
+end

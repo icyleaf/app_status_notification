@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'app_status_notification/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'app_status_notification'
+  spec.name          = AppStatusNotification::NAME
   spec.version       = AppStatusNotification::VERSION
   spec.authors       = ['icyleaf']
   spec.email         = ['icyleaf.cn@gmail.com']
