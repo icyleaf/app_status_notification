@@ -24,8 +24,11 @@ module AppStatusNotification
     rescue Interrupt
       logger.info t('logger.interrupt')
       exit
+    rescue Faraday::ConnectionFailed
+      logger.info t('logger.connection_failed')
+      retry
     rescue => e
-      Raven.capture_exception(e) unless config.dry?
+      Sentry.capture_exception(e) unless config.dry?
 
       logger.error t('logger.raise_error', message: e.full_message)
       wait_next_loop
