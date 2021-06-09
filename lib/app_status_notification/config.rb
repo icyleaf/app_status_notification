@@ -2,7 +2,7 @@
 
 require 'app_status_notification/version'
 require 'anyway_config'
-require 'raven/base'
+require 'sentry-ruby'
 require 'logger'
 require 'i18n'
 
@@ -74,12 +74,12 @@ module AppStatusNotification
     def configure_crash_report
       return unless enable_crash_report
 
-      Raven.configure do |raven|
-        raven.dsn = crash_report
-        raven.current_environment = env
-        raven.logger = logger
-        raven.release = AppStatusNotification::VERSION
-        raven.excluded_exceptions += [
+      Sentry.init do |config|
+        config.send_default_pii = true
+        config.dsn = crash_report
+        config.environment = env
+        config.release = AppStatusNotification::VERSION
+        config.excluded_exceptions += [
           'Faraday::SSLError',
           'Spaceship::UnauthorizedAccessError',
           'Interrupt',
@@ -88,7 +88,7 @@ module AppStatusNotification
           'Faraday::ConnectionFailed'
         ]
 
-        raven.before_send = lambda { |event, hint|
+        config.before_send = lambda { |event, hint|
           event.extra = {
             config: self.to_filtered_h
           }
