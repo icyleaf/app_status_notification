@@ -1,0 +1,27 @@
+# project
+config/*.local.yml
+config/*.p8
+main.rb
+Makefile
+stores
+
+# docker
+Dockerfile*
+
+# common
+README.*
+.git*
+.gitignore
+.editorconfig
+.rubocop.yml
+.ruby-gemset
+.ruby-version
+.rvmrc
+.byebug_history
+.history
+.bundle
+.vscode
+.DS_Store
+.ruby-gemset
+.ruby-version
+.codeclimate.yml
