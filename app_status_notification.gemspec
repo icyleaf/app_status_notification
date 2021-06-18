@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport', '>= 6.0.3.1'
   spec.add_dependency 'gli', '~> 2.20.0'
   spec.add_dependency 'i18n', '~> 1.8.5'
-  spec.add_dependency 'sentry-raven'
+  spec.add_dependency 'sentry-ruby', '~> 4.5.1'
 
   spec.add_development_dependency 'awesome_print', '~> 2.0.0.pre2'
   spec.add_development_dependency 'bundler', '~> 2.1'
