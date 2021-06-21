@@ -212,7 +212,6 @@ module AppStatusNotification
       if (cache_version = store.version) &&
         Gem::Version.new(live_version.version_string) >= Gem::Version.new(cache_version)
 
-        # TODO: 审核的版本已经发布发送通知
         send_notifications(
           key: 'messages.app_was_on_sale',
           app: app.name,
