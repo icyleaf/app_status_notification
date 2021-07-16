@@ -1,17 +1,15 @@
 FROM ruby:2.7-alpine
 
 ARG REPLACE_CHINA_MIRROR="true"
-ARG ORIGINAL_REPO_URL="http://dl-cdn.alpinelinux.org"
-ARG MIRROR_REPO_URL="https://mirrors.tuna.tsinghua.edu.cn"
+ARG ORIGINAL_REPO_URL="dl-cdn.alpinelinux.org"
+ARG MIRROR_REPO_URL="mirrors.ustc.edu.cn"
 ARG RUBYGEMS_SOURCE="https://gems.ruby-china.com/"
 ARG TZ="Asia/Shanghai"
 
 # System dependencies
 RUN set -ex && \
     if [[ "$REPLACE_CHINA_MIRROR" == "true" ]]; then \
-      REPLACE_STRING=$(echo $MIRROR_REPO_URL | sed 's/\//\\\//g') && \
-      SEARCH_STRING=$(echo $ORIGINAL_REPO_URL | sed 's/\//\\\//g') && \
-      sed -i "s/$SEARCH_STRING/$REPLACE_STRING/g" /etc/apk/repositories && \
+      sed -i "s/$ORIGINAL_REPO_URL/$MIRROR_REPO_URL/g" /etc/apk/repositories && \
       gem sources --add $RUBYGEMS_SOURCE --remove https://rubygems.org/; \
     fi && \
     apk --update --no-cache add tzdata && \
@@ -25,6 +23,6 @@ RUN gem install /tmp/${APP_STATUS_NOTIFICATION_VERSION}.gem
 
 WORKDIR /app
 
-VOLUME [ "/app/config" ]
+VOLUME [ "/app/config", "/app/stores" ]
 
 CMD ["app_status_notification", "--config", "/app/config"]
