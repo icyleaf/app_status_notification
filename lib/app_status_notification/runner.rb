@@ -171,21 +171,13 @@ module AppStatusNotification
 
       r = client.select_version_build(edit_version.id, build_id: build.id)
       if r.status == 204
-        store.selected_build = build.version
-        send_notifications(
-          key: 'messages.success_select_appstoreversion_build',
-          app: app.name,
-          version: edit_version.version_string,
-          build: build.version
-        )
+        suceess_selected_build_notification(edit_version.version_string, build)
       else
-        send_notifications(
-          key: 'messages.failed_select_appstoreversion_build',
-          app: app.name,
-          version: edit_version.version_string,
-          build: build.version
-        )
+        fail_selected_build_notification(edit_version.version_string, build)
       end
+    rescue ConnectAPIError => e
+      logger.error("[#{e.class}]: #{e.full_message}")
+      fail_selected_build_notification(edit_version.version_string, build)
     end
 
     def cached_latest_build?(version, build)
@@ -281,6 +273,28 @@ module AppStatusNotification
     #####################
     # Notifcations
     #####################
+
+    # 成功自动勾选最新上传的构建版本通知
+    def suceess_selected_build_notification(version, build)
+      store.selected_build(build.version)
+      send_notifications(
+        key: 'messages.success_select_appstoreversion_build',
+        app: app.name,
+        version: version,
+        build: build.version
+      )
+    end
+
+    # 失败自动勾选最新上传的构建版本通知
+    def fail_selected_build_notification(version, build)
+      store.unselected_build(build.version)
+      send_notifications(
+        key: 'messages.failed_select_appstoreversion_build',
+        app: app.name,
+        version: version,
+        build: build.version
+      )
+    end
 
     # 发出接收到构建版本通知
     def build_received_notification(version, build)
