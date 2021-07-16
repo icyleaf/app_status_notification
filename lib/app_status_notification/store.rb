@@ -7,7 +7,13 @@ module AppStatusNotification
   class Store
     extend Forwardable
 
-    ALLOWED_KEYS = %i[version status latest_build selected_build unselected_build]
+    # 可使用的键
+    # version: 提交审核的主版本号，比如 1.0.0
+    # status: app 审核的状态，参考 AppStatusNotification::ConnectAPI::Model::AppStoreVersion::AppStoreState
+    # latest_build: 当前 version 最新上传的构建版本
+    # selected_build: 已勾选的构建版本
+    # unselected_build: 曾经勾选过后又取消或被替换的构建版本
+    ALLOWED_KEYS = %i[version status latest_build select_status selected_build unselected_build]
 
     def_delegators :@cache, :read, :write, :delete, :clear
 
