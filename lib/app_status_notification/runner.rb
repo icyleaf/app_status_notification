@@ -276,7 +276,7 @@ module AppStatusNotification
 
     # 成功自动勾选最新上传的构建版本通知
     def suceess_selected_build_notification(version, build)
-      store.selected_build(build.version)
+      store.selected_build = build.version
       send_notifications(
         key: 'messages.success_select_appstoreversion_build',
         app: app.name,
@@ -287,7 +287,7 @@ module AppStatusNotification
 
     # 失败自动勾选最新上传的构建版本通知
     def fail_selected_build_notification(version, build)
-      store.unselected_build(build.version)
+      store.unselected_build = build.version
       send_notifications(
         key: 'messages.failed_select_appstoreversion_build',
         app: app.name,

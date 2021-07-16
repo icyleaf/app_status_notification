@@ -16,8 +16,9 @@ module AppStatusNotification
       end
 
       def send(message, options)
-        adapter = options.delete('type')
-        notification = Notification[adapter].new(options)
+        opts = options.dup
+        adapter = opts.delete('type')
+        notification = Notification[adapter].new(opts)
         notification.send(message)
       end
 
