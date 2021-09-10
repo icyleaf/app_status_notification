@@ -98,6 +98,9 @@ module AppStatusNotification
         end
       end
 
+      # 如果
+      return if latest_build.processing_state == ConnectAPI::ProcessStatus::PROCESSING
+
       selected_build_notification(edit_version, latest_build)
     end
 
