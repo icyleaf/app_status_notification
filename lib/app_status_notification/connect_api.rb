@@ -34,7 +34,6 @@ module AppStatusNotification
     %w[get post patch delete].each do |method|
       define_method method do |path, options = {}|
         params = options.dup
-        connection.authorization :Bearer, @auth.token
 
         if %w[post patch].include?(method)
           body = params[:body].to_json
@@ -82,6 +81,7 @@ module AppStatusNotification
       connection_opts[:proxy] = ENV['ASN_PROXY'] if ENV['ASN_PROXY']
       @connection = Faraday.new(endpoint, connection_opts) do |builder|
         builder.request :url_encoded
+        builder.request :authorization, 'Bearer', @auth.token
         builder.headers[:content_type] = 'application/json'
 
         builder.response :json, content_type: /\bjson$/
