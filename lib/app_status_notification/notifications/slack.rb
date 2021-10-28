@@ -4,54 +4,57 @@
 
 module AppStatusNotification
   module Notification
-    class Slack < Adapter
-
-      def initialize(options)
-        @webhook_url = URI(options['webhook_url'])
-        @token = options['token']
-        @channel = options['channel']
-
-        super
+    class Slack < WebHookAdapter
+      def send(message)
+        send_request(webhook_url, body(message))
       end
 
-      def send(message)
-        data = if message.is_a?(String)
-                  {
-                    type: :mrkdwn,
-                    text: message
-                  }
-                else
-                  {
-                    blocks: [
-                      {
-                        type: :section,
-                        text: {
-                          type: 'mrkdwn',
-                          text: t(**message),
-                        }
-                      },
-                      {
-                        type: :section,
-                        fields: [
-                          {
-                            type: :mrkdwn,
-                            text: "*版本:*\n#{message[:version]}"
-                          },
-                          {
-                            type: :mrkdwn,
-                            text: "*状态:*\n#{message[:status]}"
-                          }
-                        ]
-                      },
-                    ]
-                  }
-                end
+      private
 
-        response = Net::HTTP.post(@webhook_url,  data.to_json, 'Content-Type' => 'application/json')
-        logger.debug "#{self.class} response [#{response.code}] #{response.body}"
-      rescue => e
-        @exception = e
-        nil
+      def body(message)
+        message.is_a?(String) ? markdown_body(message) : card_body(message)
+      end
+
+      def markdown_body(message)
+        {
+          type: :mrkdwn,
+          text: message
+        }.to_json
+      end
+
+      def card_body(message)
+        {
+          blocks: [
+            {
+              type: :section,
+              text: {
+                type: :mrkdwn,
+                text: t(**message),
+              }
+            },
+            {
+              type: :section,
+              fields: [
+                {
+                  type: :mrkdwn,
+                  text: "*版本:*\n#{message[:version]}"
+                },
+                {
+                  type: :mrkdwn,
+                  text: "*状态:*\n#{message[:status]}"
+                }
+              ]
+            }
+          ]
+        }.to_json
+      end
+
+      def token
+        @token ||= options['token']
+      end
+
+      def channel
+        @channel ||= options['channel']
       end
 
       Notification.register self, :slack

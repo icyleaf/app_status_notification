@@ -4,52 +4,50 @@
 
 module AppStatusNotification
   module Notification
-    class Dingtalk < Adapter
-      def initialize(options)
-        @webhook_url = URI(options['webhook_url'])
-        @secret = options['secret']
-
-        super
+    class Dingtalk < WebHookAdapter
+      def send(message)
+        send_request(url, body(message))
       end
 
-      def send(message)
-        message = t(**message)
+      private
 
-        data = {
+      def url
+        url = webhook_url.dup
+        query = url.query
+        if secret_sign = generate_sign
+          query = CGI.parse(query).merge(secret_sign)
+          url.query = URI.encode_www_form(query)
+        end
+
+        url
+      end
+
+      def body(options)
+        message = t(**options)
+
+        {
           msgtype: :markdown,
           markdown: {
             title: message,
             text: message
           }
-        }
-
-        response = Net::HTTP.post(build_url, data.to_json, 'Content-Type' => 'application/json')
-        logger.debug "#{self.class} response [#{response.code}] #{response.body}"
-      rescue => e
-        @exception = e
-        nil
-      end
-
-      def build_url
-        url = @webhook_url.dup
-        query = url.query
-        if secret_sign = generate_sign
-          query = CGI.parse(query).merge(secret_sign)
-        end
-        url.query = URI.encode_www_form(query)
-        url
+        }.to_json
       end
 
       def generate_sign
-        return unless @secret
+        return unless secret
 
         timestamp = (Time.now.to_f * 1000).to_i
-        sign = Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), @secret, "#{timestamp}\n#{@secret}")).strip
+        sign = Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), secret, "#{timestamp}\n#{secret}")).strip
 
         {
           timestamp: timestamp,
           sign: sign
         }
+      end
+
+      def secret
+        @secret ||= options['secret']
       end
 
       Notification.register self, :dingtalk, :dingding

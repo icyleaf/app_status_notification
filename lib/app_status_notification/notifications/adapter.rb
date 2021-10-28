@@ -9,9 +9,10 @@ module AppStatusNotification
     class Adapter
       include AppStatusNotification::I18nHelper
 
+      attr_reader :options
+
       def initialize(options = {}) # rubocop:disable Style/OptionHash
         @options = options
-        @logger = @options[:logger]
       end
 
       # def send(message)
@@ -22,10 +23,28 @@ module AppStatusNotification
       #   fail Error, "Adapter does not supports #send"
       # end
 
-      private
+      protected
 
       def logger
-        @logger
+        @logger ||= @options['logger']
+      end
+    end
+
+    class WebHookAdapter < Adapter
+      protected
+
+      def send_request(url, body, method: :post, content_type: 'application/json')
+        response = Net::HTTP.send(method, url, body, 'Content-Type' => content_type)
+        logger.debug "#{self.class} response [#{response.code}] #{response.body}"
+        response
+      rescue => exception
+        @exception = exception
+        logger.error @exception
+        nil
+      end
+
+      def webhook_url
+        @webhook_url ||= URI(@options['webhook_url'])
       end
     end
   end
