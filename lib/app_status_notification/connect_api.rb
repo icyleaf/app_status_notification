@@ -67,7 +67,8 @@ module AppStatusNotification
       response = Response.new(response, connection)
 
       if (remaining = response.rate[:remaining]) && remaining.to_i.zero?
-        raise RateLimitExceededError, "Request limit reached #{response.rate[:limit]} in the previous 60 minutes with url: #{response.request_url}"
+        raise RateLimitExceededError, "Request limit reached #{response.rate[:limit]}
+          in the previous 60 minutes with url: #{response.request_url}"
       end
 
       response

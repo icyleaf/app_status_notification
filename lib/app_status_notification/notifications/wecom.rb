@@ -7,23 +7,23 @@ module AppStatusNotification
     class WeCom < WebHookAdapter
       MARKDOWN_MAX_LIMITED_LENGTH = 4096
 
-      def send(message)
-        send_request(webhook_url, body(message))
+      def send(data)
+        send_request(webhook_url, body(data))
       end
 
       private
 
-      def body(options)
+      def body(data)
         {
           msgtype: :markdown,
           markdown: {
-            content: content(options)
+            content: content(data)
           }
         }.to_json
       end
 
-      def content(options)
-        message = t(**options)
+      def content(data)
+        message = t(data)
 
         if message.bytesize >= MARKDOWN_MAX_LIMITED_LENGTH
           "#{message[0..MARKDOWN_MAX_LIMITED_LENGTH-10]}\n\n..."

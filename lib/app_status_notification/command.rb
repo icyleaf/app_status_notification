@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'app_status_notification'
 require 'app_status_notification/version'
 
@@ -14,23 +16,22 @@ class AppStatusNotification::Command
   arguments :strict
 
   desc 'Enable development mode (use .local.yml config)'
-  switch [:d, :development]
+  switch %i(d development)
 
   desc 'Set log level'
   default_value 'info'
   arg_name 'value'
-  flag [:'log-level']
+  flag %i(log-level)
 
   desc 'Set config path'
   arg_name 'config'
-  flag [:c, :config]
+  flag %i(c config)
 
   desc 'Set store path'
   arg_name 'store'
-  flag [:s, :store]
+  flag %i(s store)
 
   desc 'Start watch service'
-  arg_name 'Describe arguments to ddd here'
   command :watch do |c|
     c.action do |global, options, args|
       AppStatusNotification.watch(global[:config], global[:store])

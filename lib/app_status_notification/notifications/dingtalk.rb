@@ -38,7 +38,8 @@ module AppStatusNotification
         return unless secret
 
         timestamp = (Time.now.to_f * 1000).to_i
-        sign = Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), secret, "#{timestamp}\n#{secret}")).strip
+        hmac = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), secret, "#{timestamp}\n#{secret}")
+        sign = Base64.encode64(hmac).strip
 
         {
           timestamp: timestamp,

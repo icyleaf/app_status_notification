@@ -8,3 +8,16 @@ en:
     app_store_status_changes_with_todo: '%{app} v%{version} 状态变更为：**%{status}**。确认事项：%{todo}'
   app_status:
     READY_FOR_SALE: 'Ready For Sale'
+  logger:
+    current_env: '当前运行环境: %{name}, 版本: %{version}'
+    setup_accounts: '开始初始化 %{numbers} 个账户'
+    setup_apps: '配置账户 %{issuer_id} 下的 %{apps} 个应用'
+    found_app: '找到匹配应用 %{id} - %{name} (%{bundle_id})'
+    not_found_edit_version: '没有找到编辑版本，当前现在版本是 %{version}'
+
+    enabled_notification: 'Enabled notifications [%{count}]: %{notifications}'
+    send_notification: '[%{name}] Send message：%{message}'
+
+    wait_next_loop: '等待下次查询，刷新时长 %{interval} 秒'
+    raise_error: '捕捉异常错误 %{message}'
+    interrupt: 人为退出程序
