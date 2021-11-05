@@ -53,6 +53,7 @@ module AppStatusNotification
 end
 
 require 'app_status_notification/notifications/adapter'
-require 'app_status_notification/notifications/wecom'
 require 'app_status_notification/notifications/slack'
+require 'app_status_notification/notifications/wecom'
 require 'app_status_notification/notifications/dingtalk'
+require 'app_status_notification/notifications/feishu'
