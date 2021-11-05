@@ -205,7 +205,8 @@ module AppStatusNotification
 
       class App
         def self.parse(apps)
-          raise MissingAppsConfigError, 'Unable handle all apps of account, add app id(s) under accounts with name `apps`.' unless apps
+          raise MissingAppsConfigError, 'Unable handle all apps of account,
+            add app id(s) under accounts with name `apps`.' unless apps
 
           [].tap do |obj|
             apps.each do |app|

@@ -1,7 +1,7 @@
 zh:
   messages:
-    app_version_created: '%{app} 创建了新版本: %{version}，当前状态 %{status}'
-    app_version_changed: '%{app} 提交版本号变更: **%{current_version}** => **%{new_version}**，当前状态 %{status}'
+    app_version_created: '%{app} 创建了新版本: %{version}，当前状态: %{status}'
+    app_version_changed: '%{app} 提交版本号变更: **%{current_version}** => **%{new_version}**，当前状态: %{status}'
     app_build_received: '%{app} %{version} 接收到新构建版本 **%{build}**，等待苹果预处理 ...'
     app_build_processed: '%{app} %{version} 构建版本 **%{build}** 处理完毕，请手动登录网页上选中此构建版本'
     app_build_selected: '%{app} %{version} 构建版本 **%{build}** 选中完毕，物料准备好就可以提交审核'
@@ -47,6 +47,7 @@ zh:
     found_app: '找到匹配应用 %{id} - %{name} (%{bundle_id})'
     not_found_edit_version: '没有找到编辑版本，当前现在版本是 %{version}'
 
+    enabled_notification: '已启用的通知 [%{count}]: %{notifications}'
     send_notification: '[%{name}] 发送消息：%{message}'
 
     wait_next_loop: '等待下次查询，刷新时长 %{interval} 秒'

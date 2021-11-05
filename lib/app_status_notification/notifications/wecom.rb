@@ -4,40 +4,32 @@
 
 module AppStatusNotification
   module Notification
-    class WeCom < Adapter
-      attr_reader :exception
-
+    class WeCom < WebHookAdapter
       MARKDOWN_MAX_LIMITED_LENGTH = 4096
 
-      @exception = nil
-
-      def initialize(options)
-        @webhook_url = URI(options['webhook_url'])
-        super
+      def send(data)
+        send_request(webhook_url, body(data))
       end
 
-      def send(message)
-        @exception = nil
+      private
 
-        message = t(message)
-        content = if message.bytesize >= MARKDOWN_MAX_LIMITED_LENGTH
-                    "#{message[0..MARKDOWN_MAX_LIMITED_LENGTH-10]}\n\n..."
-                  else
-                    message
-                  end
-
-        data = {
+      def body(data)
+        {
           msgtype: :markdown,
           markdown: {
-            content: content
+            content: content(data)
           }
-        }
+        }.to_json
+      end
 
-        response = Net::HTTP.post(@webhook_url, data.to_json, 'Content-Type' => 'application/json')
-        logger.debug "#{self.class} response [#{response.code}] #{response.body}"
-      rescue => e
-        @exception = e
-        nil
+      def content(data)
+        message = t(data)
+
+        if message.bytesize >= MARKDOWN_MAX_LIMITED_LENGTH
+          "#{message[0..MARKDOWN_MAX_LIMITED_LENGTH-10]}\n\n..."
+        else
+          message
+        end
       end
 
       Notification.register self, :wecom, :wechat_work
