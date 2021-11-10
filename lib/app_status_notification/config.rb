@@ -21,8 +21,8 @@ module AppStatusNotification
                 crash_report: 'https://aa7c78acbb324fcf93169fce2b7e5758@o333914.ingest.sentry.io/5575774'
 
     def load_locale(path, file = '*.yml')
-      path = File.join(path) unless path.ends_with?(file)
-      I18n.load_path << Dir[path]
+      paths = File.join(path, file) unless path.end_with?(file)
+      I18n.load_path += Dir[paths]
     end
 
     def debug?
