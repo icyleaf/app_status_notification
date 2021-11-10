@@ -23,7 +23,7 @@ class AppStatusNotification::Command
   arg_name 'value'
   flag %i(log-level)
 
-  desc 'Set config path'
+  desc 'Set config path (and custom locales)'
   arg_name 'config'
   flag %i(c config)
 
