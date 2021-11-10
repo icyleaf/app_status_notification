@@ -28,17 +28,17 @@ zh:
     prepare_for_submission: '等待提交审核'
     metadata_rejected: '元数据驳回，请去网页或 Connect App 查看被拒原因'
     invalid_binary: '无效的二进制包'
-  todo:
-    ready_for_sale:
-    processing_for_app_store:
-    pending_developer_release:
-    in_review:
-    waiting_for_review:
-    developer_rejected:
-    rejected:
-    prepare_for_submission:
-    metadata_rejected:
-    invalid_binary:
+  # todo:
+  #   ready_for_sale:
+  #   processing_for_app_store:
+  #   pending_developer_release:
+  #   in_review:
+  #   waiting_for_review:
+  #   developer_rejected:
+  #   rejected:
+  #   prepare_for_submission:
+  #   metadata_rejected:
+  #   invalid_binary:
 
   logger:
     current_env: '当前运行环境: %{name}, 版本: %{version}'
