@@ -2,5 +2,5 @@
 
 module AppStatusNotification
   NAME = 'app_status_notification'
-  VERSION = '0.9.0.rc1'
+  VERSION = '0.11.0'
 end
