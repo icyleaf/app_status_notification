@@ -16,8 +16,9 @@ RUN set -ex && \
     cp /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone
 
-ARG APP_STATUS_NOTIFICATION_VERSION="0.9.0.beta7"
+ARG APP_STATUS_NOTIFICATION_VERSION="0.11.0"
 
+ENV ASN_ENV="production"
 COPY pkg/app_status_notification-${APP_STATUS_NOTIFICATION_VERSION}.gem /tmp/
 RUN gem install /tmp/app_status_notification-${APP_STATUS_NOTIFICATION_VERSION}.gem && \
     rm -f /tmp/app_status_notification-${APP_STATUS_NOTIFICATION_VERSION}.gem
