@@ -1,4 +1,4 @@
-zh:
+zh-cn:
   messages:
     test: 这是一个测试消息，你现在监听的应用是 %{name}
     app_version_created: '%{app} 创建了新版本: %{version}，当前状态: %{status}'

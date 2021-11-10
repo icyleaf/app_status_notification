@@ -13,7 +13,7 @@ module AppStatusNotification
     attr_config accounts: [],
                 notifications: {},
                 refresh_interval: 60,
-                locale: 'zh',
+                locale: 'zh-cn',
                 store_path: 'stores',
                 dry: false,
                 test_mode: false,

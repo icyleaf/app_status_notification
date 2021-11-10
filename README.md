@@ -4,10 +4,13 @@
 
 ## Features
 
-- Using App Store Connect official API
-- Support multi account from appstoreconnect
-- Support multi application
-- Built-in mostly SNS platforms: Slack, Dingtalk, Wechat work, more is comming
+- Using App Store Connect official API.
+- Support multi-account from appstoreconnect.
+- Support multi-application (iOS, macOS).
+- Select the latest build automatically.
+- Share status intormfation to mostly services: Slack, Dingtalk, Wecom (Wechat work), Feishu (Lark), more is coming.
+- Localization support (English, Simplified Chinese).
+- Easy deploy with Docker.
 
 ## Configuration
 

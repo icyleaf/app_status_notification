@@ -1,5 +1,5 @@
 refresh_interval: 60
-locale: zh
+locale: zh-cn
 
 accounts:
   - issuer_id:

@@ -1,23 +1,56 @@
----
 en:
   messages:
-    app_version_created: '【%{app}】Create a new version: %{version}, current status: %{status}'
-    app_version_changed: ''
-    app_was_on_sale: '%{app} v%{version} 版本已经发布到 App Store 撒花！！！'
-    app_store_status_changes: '%{app} v%{version} 状态变更为：**%{status}**'
-    app_store_status_changes_with_todo: '%{app} v%{version} 状态变更为：**%{status}**。确认事项：%{todo}'
-  app_status:
-    READY_FOR_SALE: 'Ready For Sale'
-  logger:
-    current_env: '当前运行环境: %{name}, 版本: %{version}'
-    setup_accounts: '开始初始化 %{numbers} 个账户'
-    setup_apps: '配置账户 %{issuer_id} 下的 %{apps} 个应用'
-    found_app: '找到匹配应用 %{id} - %{name} (%{bundle_id})'
-    not_found_edit_version: '没有找到编辑版本，当前现在版本是 %{version}'
+    test: Test message, now watching app is %{name}
+    app_version_created: '%{app} create a new verion: %{version}, current status: %{status}'
+    app_version_changed: '%{app} changed version from **%{current_version}** to **%{new_version}** with status %{status}'
+    app_build_received: '%{app} %{version} recevied new build **%{build}**, waiting Apple processing ...'
+    app_build_processed: '%{app} %{version} process finished with build **%{build}**, select it from web brower please'
+    app_build_selected: '%{app} %{version} selected build **%{build}** successfully'
+    app_build_removed: '%{app} %{version} unselected build **%{build}**'
+    app_build_changed: '%{app} %{version} selected build **%{old_build}** was out of version, the latest build is %{new_build}'
+    app_build_failed: '%{app} %{version} fail to process build **%{build}** with status %{status}, select it from web brower please'
+    app_was_on_sale: '%{app} %{version} was on sale!!!'
 
-    enabled_notification: 'Enabled notifications [%{count}]: %{notifications}'
+    app_store_status_changes: '%{app} %{version} changed status to **%{status}**'
+    app_store_status_changes_with_todo: '%{app} %{version} changed status to **%{status}**. make sure finish todo list: %{todo}'
+
+    select_appstoreversion_build_from_another_source: '%{app} %{version} selected build %{build} from the other channel'
+    prepare_appstoreversion_build: '%{app} %{version} try to select build **%{build}**'
+    success_select_appstoreversion_build: '%{app} %{version} selected build %{build} successfully'
+    failed_select_appstoreversion_build: '%{app} %{version} fail to process build **%{build}** select it from web brower please'
+  app_store_status:
+    ready_for_sale: 'Ready for sale'
+    processing_for_app_store: 'Processing for app store'
+    pending_developer_release: 'Pending developer release'
+    in_review: 'In review'
+    waiting_for_review: 'Wating for review'
+    developer_rejected: 'Developer rejected'
+    rejected: 'Rejected'
+    prepare_for_submission: 'Prepare for submission'
+    metadata_rejected: 'Metadata rejected'
+    invalid_binary: 'Invalid binary'
+  # todo:
+  #   ready_for_sale:
+  #   processing_for_app_store:
+  #   pending_developer_release:
+  #   in_review:
+  #   waiting_for_review:
+  #   developer_rejected:
+  #   rejected:
+  #   prepare_for_submission:
+  #   metadata_rejected:
+  #   invalid_binary:
+
+  logger:
+    current_env: 'Running env: %{name}, version: %{version}'
+    setup_accounts: 'Setting up %{numbers} account(s)'
+    setup_apps: 'Setting up %{apps} apps in issuer id %{issuer_id}'
+    found_app: 'Found app %{id} - %{name} (%{bundle_id})'
+    not_found_edit_version: 'Not found edit version, live version was %{version}'
+
+    enabled_notification: 'Enabled notification [%{count}]: %{notifications}'
     send_notification: '[%{name}] Send message：%{message}'
 
-    wait_next_loop: '等待下次查询，刷新时长 %{interval} 秒'
-    raise_error: '捕捉异常错误 %{message}'
-    interrupt: 人为退出程序
+    wait_next_loop: 'Wait next round, refresh interval %{interval} seconds'
+    raise_error: 'Catched error: %{message}'
+    interrupt: Interrupt to exit
