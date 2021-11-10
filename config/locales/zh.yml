@@ -1,5 +1,6 @@
 zh:
   messages:
+    test: 这是一个测试消息，你现在监听的应用是 %{name}
     app_version_created: '%{app} 创建了新版本: %{version}，当前状态: %{status}'
     app_version_changed: '%{app} 提交版本号变更: **%{current_version}** => **%{new_version}**，当前状态: %{status}'
     app_build_received: '%{app} %{version} 接收到新构建版本 **%{build}**，等待苹果预处理 ...'

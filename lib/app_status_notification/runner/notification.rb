@@ -166,6 +166,13 @@ class AppStatusNotification::Runner
       )
     end
 
+    def test_notification(app)
+      send_notifications(
+        key: 'messages.test',
+        name: app.name
+      )
+    end
+
     def send_notifications(message)
       return unless message
 

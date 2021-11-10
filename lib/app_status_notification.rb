@@ -14,8 +14,8 @@ module AppStatusNotification
     AppStatusNotification::Command.run(params)
   end
 
-  def self.watch(config_path = nil, store_path = nil)
-    AppStatusNotification::Watchman.run(config_path, store_path)
+  def self.watch(config_path = nil, store_path = nil, test_mode: false)
+    AppStatusNotification::Watchman.run(config_path, store_path, test_mode: test_mode)
   end
 
   def self.development(enabled = false)

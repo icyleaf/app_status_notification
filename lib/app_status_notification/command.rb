@@ -38,6 +38,13 @@ class AppStatusNotification::Command
     end
   end
 
+  desc 'Test config struct and send test message via webhook(s)'
+  command :test do |c|
+    c.action do |global, options, args|
+      AppStatusNotification.watch(global[:config], global[:store], test_mode: true)
+    end
+  end
+
   pre do |global, command, options, args|
     AppStatusNotification.development(global[:development])
     # Pre logic here

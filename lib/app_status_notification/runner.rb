@@ -27,7 +27,7 @@ module AppStatusNotification
 
     def start
       find_app
-      start_work
+      config.test_mode ? start_test : start_work
     rescue Interrupt
       logger.info t('logger.interrupt')
       exit
@@ -39,6 +39,10 @@ module AppStatusNotification
 
       wait_next_loop
       retry
+    end
+
+    def start_test
+      test_notification(app)
     end
 
     def start_work
