@@ -1,30 +1,36 @@
 refresh_interval: 60
 locale: zh-cn
 
+# Fetch issuer_id, key_id and key file by following the offical webpage: https://developer.apple.com/app-store-connect/api/
 accounts:
-  - issuer_id:
-    key_id:
-    key_path:
-    apps:
-      # Enable all notifications
-      - 123456789
+  # - issuer_id: U-U-I-D
+  #   key_id: ABCDEFG
+  #   key_path: ./config/AuthKey_ABCDEFG.p8
+  #   apps:
+  #     # Enable all notifications
+  #     - 123456789
 
-  - issuer_id:
-    key_id:
-    key_path:
-    apps:
-      - id:
-        # Enable wecom only
-        notifications:
-          - wecom
+  # - issuer_id:
+  #   key_id:
+  #   key_path:
+  #   apps:
+  #     - id:
+  #       # Enable wecom_user_group notification only
+  #       notifications:
+  #         - wecom_user_group
 
+# Avaiabled in wecom, dingtalk, feishu, slack notifications.
 notifications:
-  wecom:
+  wecom_user_group:
     type: wecom
     webhook_url:
-  dingding:
-    type: dingding
+  dingding_developer_group:
+    type: dingtalk
     webhook_url:
-  slack:
+    secret:
+  feishu_all_staff:
+    type: feishu
+    secret:
+  slack_notification_group:
     type: slack
     webhook_url:
