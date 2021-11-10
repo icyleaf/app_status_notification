@@ -16,6 +16,7 @@ module AppStatusNotification
                 locale: 'zh',
                 store_path: 'stores',
                 dry: false,
+                test_mode: false,
                 enable_crash_report: true,
                 crash_report: 'https://aa7c78acbb324fcf93169fce2b7e5758@o333914.ingest.sentry.io/5575774'
 
