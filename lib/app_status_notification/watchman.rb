@@ -16,8 +16,7 @@ module AppStatusNotification
         config.store_path = store_path
       end
 
-      locales_path = File.join(config_path, 'locales')
-      if Dir.exist?(locales_path)
+      if config_path && (locales_path = File.join(config_path, 'locales')) && Dir.exist?(locales_path)
         config.load_locale(locales_path)
       end
 
