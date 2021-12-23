@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    app_status_notification (0.11.0)
+    app_status_notification (0.11.1)
       activesupport (>= 6.0.3.1, < 7)
       anyway_config (>= 2.0.0, < 3)
       faraday (>= 1.0.1, < 3)
