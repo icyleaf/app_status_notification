@@ -103,7 +103,7 @@ module AppStatusNotification
         end
       end
 
-      # 如果
+      # 如果构建版本正在处理中不做处理
       return if latest_build.processing_state == ConnectAPI::ProcessStatus::PROCESSING
 
       selected_build_notification(edit_version, latest_build)
@@ -188,13 +188,12 @@ module AppStatusNotification
       true
     end
 
-    # 检查编辑版本号是否发生变化
+    # 检查编辑版本号是否发生变化
     def check_app_store_version_changes(version, status)
       cached_version = store.version
-      store.version = version
-
       status_text = t("app_store_status.#{status.downcase}")
       if cached_version.to_s.empty?
+        store.version = version
         store.status = status
         app_version_created_notification(app, version, status_text)
       elsif cached_version != version
