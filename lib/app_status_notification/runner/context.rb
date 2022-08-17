@@ -7,6 +7,7 @@ class AppStatusNotification::Runner
     extend Forwardable
 
     attr_reader :app, :config
+    def_delegators :@account, :issuer_id, :key_id, :private_key
 
     def initialize(account, app, config)
       @account = account
@@ -15,9 +16,11 @@ class AppStatusNotification::Runner
     end
 
     def client
-      @client ||= AppStatusNotification::ConnectAPI.from_context(self)
+      @client ||= TinyAppstoreConnect::Client.new(
+        issuer_id: issuer_id,
+        key_id: key_id,
+        private_key: private_key
+      )
     end
-
-    def_delegators :@account, :issuer_id, :key_id, :private_key
   end
 end

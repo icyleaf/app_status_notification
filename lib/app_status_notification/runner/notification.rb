@@ -183,8 +183,8 @@ class AppStatusNotification::Runner
                     allowed_notifications.include?(nname)
 
         logger.debug t('logger.send_notification', name: nname, message: t(**message))
-        nargs['logger'] = logger
-        AppStatusNotification::Notification.send(message, nargs) unless config.dry?
+        # nargs['logger'] = logger
+        # AppStatusNotification::Notification.send(message, nargs) unless config.dry?
       end
     end
   end

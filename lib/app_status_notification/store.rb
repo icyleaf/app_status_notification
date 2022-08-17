@@ -57,7 +57,7 @@ module AppStatusNotification
 
     def configure!
       ALLOWED_KEYS.each do |key|
-        @cache.fetch(key, nil)
+        @cache.fetch(key)
       end
     end
 

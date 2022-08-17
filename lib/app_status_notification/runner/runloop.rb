@@ -4,7 +4,7 @@ class AppStatusNotification::Runner
   module Runloop
     def runloop(&block)
       loop do
-        logger.debug store.to_h
+        # logger.debug store.to_h
         block.call
         wait_next_loop
       end

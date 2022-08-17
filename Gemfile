@@ -4,7 +4,9 @@ source 'https://rubygems.org'
 
 gemspec
 
-group :development do
-  gem 'debase'
-  gem 'ruby-debug-ide'
-end
+gem 'tiny_appstore_connect', path: File.expand_path('../tiny_appstore_connect', __dir__)
+
+# group :development do
+#   gem 'debase'
+#   gem 'ruby-debug-ide'
+# end

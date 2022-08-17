@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
+require 'tiny_appstore_connect'
 require 'app_status_notification/error'
 require 'app_status_notification/helper'
 require 'app_status_notification/config'
 require 'app_status_notification/store'
-require 'app_status_notification/connect_api'
 require 'app_status_notification/notification'
 require 'app_status_notification/watchman'
 require 'app_status_notification/command'
