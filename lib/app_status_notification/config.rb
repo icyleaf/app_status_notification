@@ -77,17 +77,18 @@ module AppStatusNotification
       return unless enable_crash_report
 
       Sentry.init do |config|
+        config.capture_exception_frame_locals = true
         config.send_default_pii = true
         config.dsn = crash_report
         config.environment = env
         config.release = AppStatusNotification::VERSION
         config.excluded_exceptions += [
           'Faraday::SSLError',
-          'Spaceship::UnauthorizedAccessError',
+          'Faraday::ConnectionFailed',
+          'TinyAppstoreConnect::InvalidUserCredentialsError',
           'Interrupt',
           'SystemExit',
           'SignalException',
-          'Faraday::ConnectionFailed'
         ]
 
         config.before_send = lambda { |event, hint|

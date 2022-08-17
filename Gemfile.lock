@@ -6,22 +6,12 @@ PATH
       anyway_config (>= 2.3.0, < 3)
       gli (~> 2.20.0)
       i18n (~> 1.8.5)
-      sentry-ruby (~> 4.7.2)
-
-PATH
-  remote: /Users/icyleaf/Development/ruby/tiny_appstore_connect
-  specs:
-    tiny_appstore_connect (0.1.7)
-      CFPropertyList (>= 2.3.4, < 3.1.0)
-      faraday (>= 1.10.0, < 3.0)
-      jwt (>= 1.4, < 3)
-      openssl (>= 2.2.1, < 4)
+      sentry-ruby (~> 5)
+      tiny_appstore_connect
 
 GEM
   remote: https://rubygems.org/
   specs:
-    CFPropertyList (3.0.5)
-      rexml
     activesupport (7.0.3.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
@@ -85,13 +75,12 @@ GEM
     ruby-next-core (0.15.2)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
-    sentry-ruby (4.7.3)
+    sentry-ruby (5.4.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-      faraday (>= 1.0)
-      sentry-ruby-core (= 4.7.3)
-    sentry-ruby-core (4.7.3)
-      concurrent-ruby
-      faraday
+    tiny_appstore_connect (0.1.7)
+      faraday (>= 1.10.0, < 3.0)
+      jwt (>= 1.4, < 3)
+      openssl (>= 2.2.1, < 4)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.8.0)
@@ -107,7 +96,6 @@ DEPENDENCIES
   rake (~> 13.0)
   rspec (~> 3.10)
   rubocop (~> 1.1.0)
-  tiny_appstore_connect!
 
 BUNDLED WITH
    2.3.4

@@ -16,10 +16,11 @@ class AppStatusNotification::Runner
     end
 
     def capture_exception(exception)
-      # Sentry.capture_exception(exception) unless config.dry?
-      raise exception
       logger.error t('logger.raise_error', message: exception.full_message)
       logger.error exception.backtrace.join("\n")
+
+      Sentry.capture_exception(exception) unless config.dry?
+      raise exception
     end
   end
 end
