@@ -4,7 +4,7 @@ PATH
     app_status_notification (0.11.1)
       activesupport (>= 6.0.3.1, < 8)
       anyway_config (>= 2.3.0, < 3)
-      gli (~> 2.20.0)
+      gli (>= 2.20, < 2.22)
       i18n (>= 1.8.5, < 1.13.0)
       sentry-ruby (~> 5)
       tiny_appstore_connect
@@ -30,7 +30,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.0)
-    gli (2.20.1)
+    gli (2.21.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
