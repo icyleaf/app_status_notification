@@ -22,18 +22,13 @@ Gem::Specification.new do |spec|
   spec.bindir = 'exe'
   spec.executables << 'app_status_notification'
 
-  # spec.add_dependency 'faraday', '>= 1.0.1', '< 3'
-  # spec.add_dependency 'faraday_middleware', '>= 1.0.0', '< 3'
-  # spec.add_dependency 'jwt', '>= 1.4', '<= 2.2.1'
   spec.add_dependency 'anyway_config', '>= 2.3.0', '< 3'
   spec.add_dependency 'activesupport', '>= 6.0.3.1', '< 7'
   spec.add_dependency 'gli', '~> 2.20.0'
   spec.add_dependency 'i18n', '~> 1.8.5'
   spec.add_dependency 'sentry-ruby', '~> 4.7.2'
 
-  spec.add_development_dependency 'awesome_print', '~> 2.0.0.pre2'
   spec.add_development_dependency 'bundler', '~> 2.1'
-  spec.add_development_dependency 'pry-byebug', '~> 3.9.0'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.10'
   spec.add_development_dependency 'rubocop', '~> 1.1.0'

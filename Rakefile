@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-
-require 'pry-byebug'
 require 'bundler/gem_tasks'
 require 'app_status_notification'
 
-require 'awesome_print'
+require 'amazing_print'
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new
