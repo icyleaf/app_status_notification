@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
 require 'bundler/gem_tasks'
 require 'app_status_notification'
 
-require 'awesome_print'
+require 'amazing_print'
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new
@@ -14,10 +13,10 @@ RuboCop::RakeTask.new(:rubocop)
 
 task(default: %i[spec rubocop])
 
+Anyway::Settings.use_local_files = true
 # ENV['ASN_PROXY'] = 'http://127.0.0.1:9999'
 
 task :try do
-  ENV['RACK_ENV'] = 'development'
   AppStatusNotification.watch
 end
 

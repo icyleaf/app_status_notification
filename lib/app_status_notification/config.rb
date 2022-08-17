@@ -26,7 +26,8 @@ module AppStatusNotification
     end
 
     def debug?
-      (ENV['ASN_ENV'] || ENV['RACK_ENV'] || ENV['RAILS_ENV']) != 'production'
+      Anyway::Settings.use_local_files == true ||
+        (ENV['ASN_ENV'] || ENV['RACK_ENV'] || ENV['RAILS_ENV']) != 'production'
     end
 
     def dry?
@@ -76,17 +77,18 @@ module AppStatusNotification
       return unless enable_crash_report
 
       Sentry.init do |config|
+        config.capture_exception_frame_locals = true
         config.send_default_pii = true
         config.dsn = crash_report
         config.environment = env
         config.release = AppStatusNotification::VERSION
         config.excluded_exceptions += [
           'Faraday::SSLError',
-          'Spaceship::UnauthorizedAccessError',
+          'Faraday::ConnectionFailed',
+          'TinyAppstoreConnect::InvalidUserCredentialsError',
           'Interrupt',
           'SystemExit',
           'SignalException',
-          'Faraday::ConnectionFailed'
         ]
 
         config.before_send = lambda { |event, hint|
@@ -180,6 +182,8 @@ module AppStatusNotification
     class Account
       def self.parse(accounts)
         [].tap do |obj|
+          next unless accounts
+
           accounts.each do |account|
             obj << Account.new(account)
           end

@@ -34,7 +34,10 @@ class AppStatusNotification::Runner
     end
 
     def store
-      @store ||= AppStatusNotification::Store.new context.app.id, config.store_path
+      @store ||= AppStatusNotification::Store.new(
+        context.app.id, config.store_path,
+        logger: context.config.logger
+      )
     end
   end
 end

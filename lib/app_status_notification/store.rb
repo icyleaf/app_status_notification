@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/cache'
+require 'active_support/notifications' # requr
 require 'forwardable'
 
 module AppStatusNotification
@@ -19,9 +20,9 @@ module AppStatusNotification
 
     attr_reader :app_id
 
-    def initialize(app_id, path)
+    def initialize(app_id, path, logger: nil)
       @cache = ActiveSupport::Cache::FileStore.new(File.join(path, app_id.to_s))
-
+      @cache.logger = logger if logger
       configure!
     end
 
@@ -57,6 +58,7 @@ module AppStatusNotification
 
     def configure!
       ALLOWED_KEYS.each do |key|
+        # @cache.exist?(key) ? @cache.read(key) :
         @cache.fetch(key, nil)
       end
     end
