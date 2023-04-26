@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'anyway_config', '>= 2.3.0', '< 3'
   spec.add_dependency 'activesupport', '>= 6.0.3.1', '< 8'
   spec.add_dependency 'gli', '>= 2.20', '< 2.22'
-  spec.add_dependency 'i18n', '>= 1.8.5', '< 1.13.0'
+  spec.add_dependency 'i18n', '>= 1.8.5', '< 1.14.0'
   spec.add_dependency 'sentry-ruby', '~> 5'
 
   spec.add_development_dependency 'bundler', '~> 2.1'
