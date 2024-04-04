@@ -29,7 +29,7 @@ GEM
       ruby-next-core (~> 1.0)
     ast (2.4.2)
     base64 (0.2.0)
-    bigdecimal (3.1.6)
+    bigdecimal (3.1.7)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     debug (1.9.2)
@@ -98,7 +98,7 @@ GEM
     ruby-next-core (1.0.2)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
-    sentry-ruby (5.17.0)
+    sentry-ruby (5.17.2)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
     stringio (3.1.0)
