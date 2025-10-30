@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport', '>= 6.0.3.1', '< 9'
   spec.add_dependency 'gli', '>= 2.20', '< 2.23'
   spec.add_dependency 'i18n', '>= 1.8.5', '< 1.15.0'
-  spec.add_dependency 'sentry-ruby', '~> 5'
+  spec.add_dependency 'sentry-ruby', '>= 5', '< 7'
 
   spec.add_development_dependency 'bundler', '~> 2.1'
   spec.add_development_dependency 'rake', '~> 13.0'
