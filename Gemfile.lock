@@ -49,7 +49,7 @@ GEM
     faraday-net_http (3.0.2)
     gli (2.22.2)
       ostruct
-    i18n (1.14.7)
+    i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     io-console (0.8.2)
     irb (1.16.0)
